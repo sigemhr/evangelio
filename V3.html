@@ -417,21 +417,25 @@
         @media (max-width: 768px) {
             section {
                 padding: 60px 20px;
-                min-height: 100svh; /* Usa small viewport height para móviles */
+                min-height: 100svh;
+                /* Usa small viewport height para móviles */
             }
 
             .hero {
-                padding-top: 20px; /* Reduce el margen superior en móvil */
+                padding-top: 20px;
+                /* Reduce el margen superior en móvil */
                 justify-content: center;
             }
 
             .scroll-indicator {
-                bottom: 25px; /* Sube el indicador para que no quede oculto */
+                bottom: 25px;
+                /* Sube el indicador para que no quede oculto */
             }
 
             h1 {
                 font-size: 2.5rem;
-                margin-top: -30px; /* Ajuste sutil hacia arriba */
+                margin-top: -30px;
+                /* Ajuste sutil hacia arriba */
             }
 
             h2 {
@@ -575,25 +579,46 @@
 
     <section>
         <span class="section-tag scroll-reveal">La Gracia en Acción</span>
-        <h2 class="scroll-reveal delay-1">La Operación del Único Dios</h2>
+        <h2 class="scroll-reveal delay-1">La Operación del Dios Vivo en Jesucristo</h2>
         <p class="scroll-reveal delay-2">
-            La salvación se desenvuelve de manera real y dinámica a través de las distinciones funcionales y económicas
-            con las que Dios interviene en nuestra historia, resguardando la suficiencia de Su propósito:
+            La salvación no es un proceso impersonal ni una serie de etapas abstractas,
+            sino la obra viva del único Dios que se ha dado a conocer plenamente en Jesucristo,
+            actuando en la historia para rescatar al hombre y llevarlo a una relación real con Él:
         </p>
 
         <div class="apple-card scroll-reveal delay-3">
             <ul class="apple-list" style="margin: 0;">
-                <li><strong>La Iniciativa (La Fuente):</strong> Todo el diseño y origen absoluto de la gracia emanan del
-                    Dios Único: <em>"Todo esto proviene de Dios, quien nos reconcilió consigo mismo por Cristo"</em>
-                    <span class="bible-ref">2 Corintios 5:18</span>.</li>
-                <li><strong>La Ejecución (La Revelación Visible):</strong> Dios se manifestó corporalmente en el tiempo
-                    en la persona del Hijo, sufriendo el quebrantamiento para pagar la deuda legal: <em>"En él habita
-                        corporalmente toda la plenitud de la Deidad"</em> <span class="bible-ref">Colosenses 2:9</span>.
+                <li>
+                    <strong>La Iniciativa (La Fuente):</strong>
+                    Todo procede del único Dios, quien en Su amor tomó la iniciativa de reconciliar al mundo consigo
+                    mismo en Jesucristo:
+                    <em>"Todo esto proviene de Dios, quien nos reconcilió consigo mismo por Cristo"</em>
+                    <span class="bible-ref">2 Corintios 5:18</span>.
                 </li>
-                <li><strong>La Aplicación (La Operación Viva):</strong> El mismo Dios aplica de forma íntima esta obra
-                    en el corazón humano por Su Espíritu, despertándolo, convenciéndolo y sellándolo: <em>"Y os daré
-                        corazón nuevo, y pondré espíritu nuevo dentro de vosotros"</em> <span class="bible-ref">Ezequiel
-                        36:26</span>.</li>
+
+                <li>
+                    <strong>La Manifestación (Dios revelado en Jesucristo):</strong>
+                    El Dios invisible se hizo visible en Jesucristo, no como un instrumento externo, sino como Su propia
+                    revelación en forma humana:
+                    <em>"En él habita corporalmente toda la plenitud de la Deidad"</em>
+                    <span class="bible-ref">Colosenses 2:9</span>.
+                </li>
+
+                <li>
+                    <strong>La Obra Redentora (La Cruz):</strong>
+                    En Jesucristo, Dios mismo llevó el pecado y efectuó la reconciliación mediante Su muerte y
+                    resurrección:
+                    <em>"Dios estaba en Cristo reconciliando consigo al mundo"</em>
+                    <span class="bible-ref">2 Corintios 5:19</span>.
+                </li>
+
+                <li>
+                    <strong>La Aplicación (La Operación Viva):</strong>
+                    El mismo Dios que se manifestó en Jesucristo ahora obra en el interior del hombre, transformándolo y
+                    dándole vida nueva:
+                    <em>"Y os daré corazón nuevo, y pondré espíritu nuevo dentro de vosotros"</em>
+                    <span class="bible-ref">Ezequiel 36:26</span>.
+                </li>
             </ul>
         </div>
     </section>
@@ -746,7 +771,7 @@
             // Usamos formsubmit.co para enviar el correo en segundo plano
             fetch("https://formsubmit.co/ajax/3iafcjbonfil@gmail.com", {
                 method: "POST",
-                headers: { 
+                headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 },
@@ -758,24 +783,24 @@
                     Mensaje: oracion
                 })
             })
-            .then(response => response.json())
-            .then(data => {
-                btn.innerHTML = '<i class="fa-solid fa-check" style="margin-right:8px;"></i> ¡Mensaje enviado!';
-                btn.style.background = "#28a745"; // Color verde de éxito
-                document.querySelector('.contact-form').reset();
-                
-                // Restaurar botón después de 4 segundos
-                setTimeout(() => {
+                .then(response => response.json())
+                .then(data => {
+                    btn.innerHTML = '<i class="fa-solid fa-check" style="margin-right:8px;"></i> ¡Mensaje enviado!';
+                    btn.style.background = "#28a745"; // Color verde de éxito
+                    document.querySelector('.contact-form').reset();
+
+                    // Restaurar botón después de 4 segundos
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.style.background = "";
+                        btn.disabled = false;
+                    }, 4000);
+                })
+                .catch(error => {
+                    alert("Hubo un error al enviar el mensaje. Por favor intenta nuevamente.");
                     btn.innerHTML = originalText;
-                    btn.style.background = "";
                     btn.disabled = false;
-                }, 4000);
-            })
-            .catch(error => {
-                alert("Hubo un error al enviar el mensaje. Por favor intenta nuevamente.");
-                btn.innerHTML = originalText;
-                btn.disabled = false;
-            });
+                });
         }
     </script>
 </body>
