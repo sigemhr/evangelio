@@ -18,5 +18,5 @@ jobs:
           host: ${{ secrets.SERVER_IP }}
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASSWORD }}
-          source: "V3.html" # Archivo a subir
+          source: "*" # Sube todos los archivos (HTML, imágenes, etc.)
           target: "/var/www/evangelio" # <-- Ruta en el servidor VPS donde se guardará (cámbiala si usas otra)
