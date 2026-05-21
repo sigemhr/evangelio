@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Qué pasa después de hoy? — Una respuesta para tu vida</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-main: #050508;
+            --bg-card: rgba(25, 25, 35, 0.55);
+            --vibrant-coral: #ff4d6d;
+            --vibrant-gold: #ffc300;
+            --text-main: #f5f5f7;
+            --text-muted: #a1a1a6;
+            --apple-blur: blur(25px);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            background-color: var(--bg-main);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            background-color: var(--bg-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Fondo Parallax Vivo pero Solemne */
+        .parallax-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: radial-gradient(circle at 50% 30%, #2b0f14 0%, #050508 80%);
+            z-index: -2;
+            transform: translateY(0);
+            will-change: transform;
+        }
+
+        .parallax-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 200vh;
+            background-image: radial-gradient(rgba(255, 77, 109, 0.06) 1.5px, transparent 0);
+            background-size: 60px 60px;
+            z-index: -1;
+            opacity: 0.6;
+            will-change: transform;
+        }
+
+        section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 24px;
+            width: 100%;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Animaciones de Scroll */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+            will-change: transform, opacity;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-1 {
+            transition-delay: 0.15s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.45s;
+        }
+
+        /* Tipografía */
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            text-align: center;
+            background: linear-gradient(180deg, #ffffff 40%, #a1a1a6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.3rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #ffffff;
+            line-height: 1.2;
+        }
+
+        .section-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            color: var(--vibrant-coral);
+            margin-bottom: 15px;
+            text-align: center;
+            display: block;
+        }
+
+        p {
+            color: var(--text-muted);
+            font-size: 1.15rem;
+            line-height: 1.65;
+            text-align: center;
+            max-width: 750px;
+            margin: 0 auto 25px auto;
+        }
+
+        .coral-text {
+            color: var(--vibrant-coral);
+            font-weight: 600;
+        }
+
+        .gold-text {
+            color: var(--vibrant-gold);
+            font-weight: 600;
+        }
+
+        .bible-ref {
+            color: var(--vibrant-gold);
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            display: block;
+            margin-top: 8px;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            animation: bounce 2.5s infinite;
+        }
+
+        /* Componentes de Bloques */
+        .apple-card {
+            background: var(--bg-card);
+            backdrop-filter: var(--apple-blur);
+            -webkit-backdrop-filter: var(--apple-blur);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .grid-box {
+            background: var(--bg-card);
+            backdrop-filter: var(--apple-blur);
+            -webkit-backdrop-filter: var(--apple-blur);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 20px;
+            padding: 35px;
+            text-align: left;
+            transition: border-color 0.4s ease, transform 0.4s ease;
+        }
+
+        .grid-box:hover {
+            border-color: rgba(255, 77, 109, 0.25);
+            transform: translateY(-4px);
+        }
+
+        .grid-box h3 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .grid-box p {
+            font-size: 0.95rem;
+            text-align: left;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .grid-box i {
+            font-size: 1.8rem;
+            color: var(--vibrant-coral);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .apple-list {
+            max-width: 800px;
+            margin: 30px auto 0 auto;
+            text-align: left;
+        }
+
+        .apple-list li {
+            list-style: none;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 22px;
+            padding-left: 35px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .apple-list li::before {
+            content: "•";
+            color: var(--vibrant-gold);
+            font-size: 1.8rem;
+            position: absolute;
+            left: 5px;
+            top: -4px;
+        }
+
+        .apple-list li strong {
+            color: #ffffff;
+        }
+
+        /* Lista de Pasos del Arrepentimiento */
+        .steps-container {
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .step-block {
+            border-left: 2px solid var(--vibrant-coral);
+            padding-left: 25px;
+            margin-bottom: 35px;
+            text-align: left;
+            position: relative;
+        }
+
+        .step-block::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--vibrant-coral);
+            box-shadow: 0 0 10px var(--vibrant-coral);
+        }
+
+        .step-block h4 {
+            font-size: 1.25rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .step-block p {
+            text-align: left;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        /* Formulario y Mapa UI Apple */
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-main);
+            padding-left: 4px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            width: 100%;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--vibrant-coral);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            background: var(--vibrant-coral);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            padding: 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 15px rgba(255, 77, 109, 0.3);
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #ff3355;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .map-wrapper {
+            width: 100%;
+            height: auto;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 35px;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+
+        .map-wrapper:hover {
+            opacity: 0.9;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-8px);
+            }
+
+            60% {
+                transform: translateY(-4px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .apple-card {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="parallax-bg" id="parallax-bg"></div>
+    <div class="parallax-particles" id="parallax-ptc"></div>
+
+    <section class="hero">
+        <div class="scroll-reveal">
+            <i class="fa-solid fa-heart-pulse"
+                style="font-size: 3rem; color: var(--vibrant-coral); margin-bottom: 20px; filter: drop-shadow(0 0 15px rgba(255,77,109,0.4));"></i>
+            <h1>Detente un minuto.</h1>
+            <p style="color: var(--vibrant-gold); font-size: 1.3rem; max-width: 600px; margin: 0 auto;">
+                Si encontraste este sticker, esto no es una casualidad. Es un mensaje directo para tu vida hoy.
+            </p>
+        </div>
+        <div class="scroll-indicator">Desliza suavemente hacia abajo</div>
+    </section>
+
+    <section>
+        <span class="section-tag scroll-reveal">La Realidad</span>
+        <h2 class="scroll-reveal delay-1">Vivimos pretendiendo estar bien</h2>
+        <p class="scroll-reveal delay-2">
+            Pasamos los días persiguiendo el éxito, el dinero o la aprobación de los demás, llenando nuestra agenda para
+            no enfrentar el vacío del corazón. Pero cuando el ruido se apaga, sabemos que algo está roto por dentro.
+            Dios nos creó para conocerle y vivir en perfecta armonía con Su justicia, pero decidimos ignorarle y
+            gobernar nuestra propia vida.
+        </p>
+        <div class="apple-card scroll-reveal delay-3" style="border-left: 3px solid var(--vibrant-gold);">
+            <p style="font-size: 1.1rem; margin: 0; color: var(--text-main); text-align: left;">
+                La Biblia llama a esto <span class="coral-text">Pecado</span>: no es solo cometer errores, es romper
+                nuestra relación con el Dios Santo que nos dio el aliento de vida. Y ante Sus ojos perfectos, nadie
+                puede esconderse.
+                <span class="bible-ref">Isaías 59:2 — "Vuestras iniquidades han hecho división entre vosotros y vuestro
+                    Dios."</span>
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <span class="section-tag scroll-reveal">El Veredicto</span>
+        <h2 class="scroll-reveal delay-1">El peso de nuestra culpa</h2>
+        <p class="scroll-reveal delay-2">
+            A veces pensamos que somos "buenas personas" porque no le hacemos daño extremo a nadie. Sin embargo, Dios no
+            nos juzga comparándonos con los demás, sino con Su propia perfección moral. Bajo ese estándar, nuestras
+            mentiras, el orgullo, los malos pensamientos y el egoísmo nos declaran <span
+                class="coral-text">judicialmente culpables</span> ante Su tribunal.
+        </p>
+
+        <div class="grid-layout">
+            <div class="grid-box">
+                <i class="fa-solid fa-scale-unbalanced"></i>
+                <h3>Justicia Absoluta</h3>
+                <p>Un Dios perfectamente justo no puede ignorar la maldad o la indiferencia humana. Si un juez humano
+                    perdona criminales por "buena gente", sería corrupto. Dios es un juez perfectamente limpio.</p>
+                <span class="bible-ref">Romanos 3:23 — "Por cuanto todos pecaron, y están destituidos de la gloria de
+                    Dios."</span>
+            </div>
+            <div class="grid-box">
+                <i class="fa-solid fa-ban"></i>
+                <h3>Obras Insuficientes</h3>
+                <p>Ninguna buena acción del presente puede borrar los delitos del pasado. Ir a la iglesia, hacer caridad
+                    o tener una religión no paga nuestra deuda legal con el Creador.</p>
+                <span class="bible-ref">Gálatas 2:16 — "El hombre no es justificado por las obras de la ley."</span>
+            </div>
+            <div class="grid-box">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <h3>El Destino Final</h3>
+                <p>El salario legal de vivir separados de Dios en la tierra es permanecer eternamente separados de Él
+                    después de la muerte, bajo Su justo juicio.</p>
+                <span class="bible-ref">Romanos 6:23 — "Porque la paga del pecado es muerte."</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <span class="section-tag scroll-reveal">El Engaño Humano</span>
+        <h2 class="scroll-reveal delay-1">La Insuficiencia de las Obras y la Religión</h2>
+        <p class="scroll-reveal delay-2">
+            Frente a esta quiebra legal, los esfuerzos del hombre por auto-salvarse resultan inútiles. Las buenas obras,
+            la moralidad y la religiosidad externa son incapaces de limpiar la mancha del pecado o revocar la sentencia
+            dictada por el Juez Supremo:
+        </p>
+
+        <div class="apple-card scroll-reveal delay-1"
+            style="background: rgba(255, 77, 109, 0.02); border: 1px solid rgba(255, 77, 109, 0.15);">
+            <ul class="apple-list">
+                <li>
+                    <strong>Trapos de Inmundicia:</strong> Incluso nuestras mejores acciones están contaminadas por
+                    motivaciones imperfectas ante la santidad pura: <em>"Si bien todos nosotros somos como suciedad, y
+                        todas nuestras justicias como trapo de inmundicia"</em> <span class="bible-ref">Isaías
+                        64:6</span>.
+                </li>
+                <li>
+                    <strong>Inoperancia de la Ley:</strong> Intentar justificarse guardando mandamientos es una
+                    imposibilidad para un ser que ya ha transgredido: <em>"Ya que por las obras de la ley ningún ser
+                        humano será justificado delante de él"</em> <span class="bible-ref">Romanos 3:20</span>.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <span class="section-tag scroll-reveal" style="color: var(--vibrant-gold);">El Rescate</span>
+        <h2 class="scroll-reveal delay-1">Lo que tú no podías pagar</h2>
+        <p class="scroll-reveal delay-2">
+            Aquí es donde irrumpe el Evangelio: la noticia más extraordinaria de la historia. Dios, sabiendo que
+            estábamos completamente incapacitados para salvarnos, intervino directamente. En una demostración real de
+            amor, **Dios se manifestó en carne en la persona de Jesucristo**, asumiendo nuestra condición para
+            rescatarnos desde dentro.
+        </p>
+
+        <div class="apple-card scroll-reveal delay-3">
+            <p
+                style="text-align: left; font-size: 1.1rem; color: var(--text-main); margin-bottom: 0; line-height: 1.65;">
+                Jesús vivió la vida perfecta que tú y yo debimos vivir, y en la cruz, **Él tomó tu lugar de
+                culpabilidad**. Él absorbió el castigo y la sentencia legal que te correspondía, pagando tu deuda por
+                completo. Tres días después, resucitó de entre los muertos, demostrando que la justicia fue satisfecha y
+                abriendo la única puerta de escape.
+                <span class="bible-ref">1 Timoteo 3:16 — "Dios fue manifestado en carne."</span>
+                <span class="bible-ref">Romanos 5:8 — "Mas Dios muestra su amor para con nosotros, en que siendo aún
+                    pecadores, Cristo murió por nosotros."</span>
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <span class="section-tag scroll-reveal">La Gracia en Acción</span>
+        <h2 class="scroll-reveal delay-1">La Operación del Único Dios</h2>
+        <p class="scroll-reveal delay-2">
+            La salvación se desenvuelve de manera real y dinámica a través de las distinciones funcionales y económicas
+            con las que Dios interviene en nuestra historia, resguardando la suficiencia de Su propósito:
+        </p>
+
+        <div class="apple-card scroll-reveal delay-3">
+            <ul class="apple-list" style="margin: 0;">
+                <li><strong>La Iniciativa (La Fuente):</strong> Todo el diseño y origen absoluto de la gracia emanan del
+                    Dios Único: <em>"Todo esto proviene de Dios, quien nos reconcilió consigo mismo por Cristo"</em>
+                    <span class="bible-ref">2 Corintios 5:18</span>.</li>
+                <li><strong>La Ejecución (La Revelación Visible):</strong> Dios se manifestó corporalmente en el tiempo
+                    en la persona del Hijo, sufriendo el quebrantamiento para pagar la deuda legal: <em>"En él habita
+                        corporalmente toda la plenitud de la Deidad"</em> <span class="bible-ref">Colosenses 2:9</span>.
+                </li>
+                <li><strong>La Aplicación (La Operación Viva):</strong> El mismo Dios aplica de forma íntima esta obra
+                    en el corazón humano por Su Espíritu, despertándolo, convenciéndolo y sellándolo: <em>"Y os daré
+                        corazón nuevo, y pondré espíritu nuevo dentro de vosotros"</em> <span class="bible-ref">Ezequiel
+                        36:26</span>.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section style="background: rgba(255, 77, 109, 0.02); width: 100vw; max-width: 100vw;">
+        <div style="max-width: 900px; margin: 0 auto; padding: 0 24px; text-align: center;">
+            <span class="section-tag scroll-reveal">La Decisión</span>
+            <h2 class="scroll-reveal delay-1" style="color: var(--vibrant-coral);">Tu respuesta hoy: El llamado al
+                Arrepentimiento</h2>
+            <p class="scroll-reveal delay-2" style="color: #ffffff;">
+                La obra de Cristo en la cruz ya está terminada, pero la salvación no es automática. No basta con saber
+                esto mentalmente ni sentir una emotion pasajera. Dios te confronta hoy de manera urgente y te demanda
+                una respuesta real. Necesitas venir a Cristo.
+            </p>
+
+            <div class="steps-container scroll-reveal delay-3">
+                <div class="step-block">
+                    <h4>1. Reconoce tu culpabilidad ante Dios</h4>
+                    <p>Abandona la excusa de tus "buenas obras". Confiésale al Creador que has vivido de espaldas a Él,
+                        quebrantando Su ley y que eres culpable ante Su tribunal.</p>
+                    <span class="bible-ref">Salmo 51:3 — "Porque yo reconozco mis rebeliones, y mi pecado está siempre
+                        delante de mí."</span>
+                </div>
+                <div class="step-block">
+                    <h4>2. Arrepiéntete de verdad</h4>
+                    <p>Arrepentirse (<span class="gold-text">Metanoia</span>) significa un cambio radical de mentalidad
+                        y de dirección. Es decidir renunciar a tu rebelión, a tus pecados y al control de tu propia
+                        vida, para rendirte voluntariamente a Su señorío.</p>
+                    <span class="bible-ref">Hechos 3:19 — "Así que, arrepentíos y convertíos, para que sean borrados
+                        vuestros pecados."</span>
+                </div>
+                <div class="step-block">
+                    <h4>3. Pon tu fe únicamente en Cristo</h4>
+                    <p>Cree de todo corazón que Jesús pagó tu condena personal en la cruz. No confíes en religiones,
+                        confía en la persona de Cristo como tu único Salvador.</p>
+                    <span class="bible-ref">Juan 14:6 — "Yo soy el camino, y la verdad, y la vida; nadie viene al Padre,
+                        sino por mí."</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <span class="section-tag scroll-reveal">El Horizonte</span>
+        <h2 class="scroll-reveal delay-1">No dejes para mañana tu eternidad</h2>
+        <p class="scroll-reveal delay-2">
+            Ignorar este mensaje es tomar la decisión de presentarte solo ante el tribunal de Dios el día que mueras,
+            cargando con el peso total de tus propios delitos. El tiempo es un recurso prestado. El mismo Dios que hoy
+            te extiende los brazos con paciencia y misericordia, es el Juez justo del mañana.
+        </p>
+
+        <div class="apple-card scroll-reveal delay-3"
+            style="text-align: center; max-width: 700px; background: rgba(255, 77, 109, 0.05); border-color: rgba(255, 77, 109, 0.2);">
+            <p
+                style="font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.5rem; color: #ffffff; margin-bottom: 0;">
+                "El que cree en el Hijo tiene vida eterna; pero el que rehúsa creer en el Hijo no verá la vida, sino que
+                la ira de Dios está sobre él."
+            </p>
+            <span class="bible-ref" style="margin-top: 15px;">Juan 3:36</span>
+        </div>
+    </section>
+
+    <section id="contacto" style="min-height: auto; padding-top: 40px; padding-bottom: 100px;">
+        <span class="section-tag scroll-reveal">Estamos aquí</span>
+        <h2 class="scroll-reveal delay-1">¿Quieres platicar o necesitas oración?</h2>
+        <p class="scroll-reveal delay-2">
+            No estás solo en este camino. Si necesitas hablar con alguien, compartir tus dudas o que oremos por ti,
+            déjanos tus datos. Te contactaremos directamente a tu número (llamada o WhatsApp).
+        </p>
+
+        <div class="apple-card scroll-reveal delay-3" style="max-width: 650px; margin: 0 auto; width: 100%;">
+            <form class="contact-form" onsubmit="enviarCorreo(event)">
+                <div class="form-group">
+                    <label for="nombre">Tu Nombre</label>
+                    <input type="text" id="nombre" placeholder="¿Cómo te llamas?" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Número de Contacto (Teléfono / WhatsApp)</label>
+                    <input type="tel" id="telefono" placeholder="Ej: 998 123 4567" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="oracion">Motivo de Oración o Mensaje (Opcional)</label>
+                    <textarea id="oracion"
+                        placeholder="Si gustas, cuéntanos brevemente en qué podemos apoyarte u orar por ti..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    <i class="fa-solid fa-paper-plane"
+                        style="display:inline; font-size:1rem; margin-right:8px; color:white;"></i> Enviar Mensaje
+                </button>
+            </form>
+
+            <a href="https://maps.app.goo.gl/dQyauLXYyfxXxuC89" target="_blank" rel="noopener noreferrer"
+                style="text-decoration: none; display: block;">
+                <div class="map-wrapper">
+                    <img src="image_9b1668.png" alt="Mapa IAFCJ 3ª DE BONFIL"
+                        style="width: 100%; height: auto; display: block; object-fit: cover;">
+                </div>
+            </a>
+
+            <p style="font-size: 0.8rem; margin-top: 15px; margin-bottom: 0; color: var(--text-muted);">
+                Ubicación de nuestra comunidad <span class="gold-text">coordenadas: 21.0997119, -86.9411894</span>.
+                ¡Eres bienvenido!
+            </p>
+        </div>
+    </section>
+
+    <script>
+        const bg = document.getElementById('parallax-bg');
+        const ptc = document.getElementById('parallax-ptc');
+
+        window.addEventListener('scroll', () => {
+            const value = window.scrollY;
+            bg.style.transform = `translateY(${value * 0.22}px)`;
+            ptc.style.transform = `translateY(${value * 0.38}px)`;
+        });
+
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        };
+
+        const revealObserver = new IntersectionObserver(revealCallback, {
+            root: null,
+            threshold: 0.08,
+            rootMargin: "0px 0px -40px 0px"
+        });
+
+        document.querySelectorAll('.scroll-reveal, .step-block').forEach(element => {
+            revealObserver.observe(element);
+        });
+
+        // Manejo del formulario vía mailto:
+        function enviarCorreo(event) {
+            event.preventDefault();
+
+            const nombre = document.getElementById('nombre').value;
+            const telefono = document.getElementById('telefono').value;
+            const oracion = document.getElementById('oracion').value || "No se especificó motivo.";
+
+            const emailDestino = "3iafcjbonfil@gmail.com";
+            const asunto = encodeURIComponent("Contacto desde QR Evangelismo: " + nombre);
+
+            const cuerpo = encodeURIComponent(
+                "Hola, he escaneado el sticker QR y me gustaría platicar.\n\n" +
+                "• Nombre: " + nombre + "\n" +
+                "• Teléfono de contacto: " + telefono + "\n\n" +
+                "• Motivo de oración / Mensaje:\n" + oracion
+            );
+
+            window.location.href = `mailto:${emailDestino}?subject=${asunto}&body=${cuerpo}`;
+        }
+    </script>
+</body>
+
+</html>
