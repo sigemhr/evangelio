@@ -716,25 +716,51 @@
             revealObserver.observe(element);
         });
 
-        // Manejo del formulario vía mailto:
         function enviarCorreo(event) {
             event.preventDefault();
+
+            const btn = document.querySelector('.submit-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin" style="margin-right:8px;"></i> Enviando...';
+            btn.disabled = true;
 
             const nombre = document.getElementById('nombre').value;
             const telefono = document.getElementById('telefono').value;
             const oracion = document.getElementById('oracion').value || "No se especificó motivo.";
 
-            const emailDestino = "3iafcjbonfil@gmail.com";
-            const asunto = encodeURIComponent("Contacto desde QR Evangelismo: " + nombre);
-
-            const cuerpo = encodeURIComponent(
-                "Hola, he escaneado el sticker QR y me gustaría platicar.\n\n" +
-                "• Nombre: " + nombre + "\n" +
-                "• Teléfono de contacto: " + telefono + "\n\n" +
-                "• Motivo de oración / Mensaje:\n" + oracion
-            );
-
-            window.location.href = `mailto:${emailDestino}?subject=${asunto}&body=${cuerpo}`;
+            // Usamos formsubmit.co para enviar el correo en segundo plano
+            fetch("https://formsubmit.co/ajax/3iafcjbonfil@gmail.com", {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    _subject: "Contacto desde QR Evangelismo: " + nombre,
+                    _template: "table",
+                    Nombre: nombre,
+                    Telefono: telefono,
+                    Mensaje: oracion
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                btn.innerHTML = '<i class="fa-solid fa-check" style="margin-right:8px;"></i> ¡Mensaje enviado!';
+                btn.style.background = "#28a745"; // Color verde de éxito
+                document.querySelector('.contact-form').reset();
+                
+                // Restaurar botón después de 4 segundos
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.style.background = "";
+                    btn.disabled = false;
+                }, 4000);
+            })
+            .catch(error => {
+                alert("Hubo un error al enviar el mensaje. Por favor intenta nuevamente.");
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            });
         }
     </script>
 </body>
