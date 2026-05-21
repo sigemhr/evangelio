@@ -415,8 +415,23 @@
         }
 
         @media (max-width: 768px) {
+            section {
+                padding: 60px 20px;
+                min-height: 100svh; /* Usa small viewport height para móviles */
+            }
+
+            .hero {
+                padding-top: 20px; /* Reduce el margen superior en móvil */
+                justify-content: center;
+            }
+
+            .scroll-indicator {
+                bottom: 25px; /* Sube el indicador para que no quede oculto */
+            }
+
             h1 {
                 font-size: 2.5rem;
+                margin-top: -30px; /* Ajuste sutil hacia arriba */
             }
 
             h2 {
